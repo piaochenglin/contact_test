@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ContactsTest</string>
+    <string name="read_contacts">READ CONTACTS</string>
+    <string name="denied_permission">you denied the permission</string>
+    <string name="need_update_system">this function need android update to JELLY_BEAN</string>
+    <string name="add_data">ADD DATA</string>
+    <string name="update_data">UPDATE DATA</string>
+    <string name="delete_data">DELETE DATA</string>
+    <string name="query_data">QUERY DATA</string>
+</resources>
