@@ -10,6 +10,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.klip.android.contactstest.R;
 import com.klip.android.contactstest.model.Article;
+import com.klip.android.contactstest.util.HttpCallbackListener;
+import com.klip.android.contactstest.util.HttpUtil;
+import com.klip.android.contactstest.util.HttpUtilOkhttpVersion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,11 +29,14 @@ import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 import static android.media.CamcorderProfile.get;
+import static com.klip.android.contactstest.util.HttpUtil.sendHttpRequest;
 
 public class HttpPageActivity extends AppCompatActivity {
     TextView http_content;
@@ -50,13 +56,36 @@ public class HttpPageActivity extends AppCompatActivity {
     private View.OnClickListener sendRequestListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            sendRequestWithUrlConnection();
+//            sendRequestWithUrlConnection();
+            HttpUtil.sendHttpRequest("https://www.baidu.com", new HttpCallbackListener() {
+                @Override
+                public void onFinish(String response) {
+                    showResponse(response);
+                }
+
+                @Override
+                public void onError(Exception e) {
+
+                }
+            });
         }
     };
     private View.OnClickListener okHttpListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            sendRequestWithOkHttp();
+//            sendRequestWithOkHttp();
+            HttpUtilOkhttpVersion.sendOkhttpRequest("http://192.168.100.246:3000/articles", new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String res = response.body().string();
+                    parseJSONWithGSON(res);
+                }
+            });
         }
     };
 
