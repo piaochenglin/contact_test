@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Button delete_data;
     private Button query_result;
     private Button web_page;
+    private Button http_page;
     private TextView query_result_text;
 
 
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         delete_data.setOnClickListener(deleteDataListener);
         web_page = (Button) findViewById(R.id.web_page);
         web_page.setOnClickListener(webPageListener);
+        http_page = (Button) findViewById(R.id.http_page);
+        http_page.setOnClickListener(httpPageListener);
         query_result_text = (TextView) findViewById(R.id.query_result_text);
         contactses = new ArrayList<>();
         adapter = new ContactAdapter(contactses);
@@ -142,6 +145,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MainActivity.this, WebviewActivity.class);
+            startActivity(intent);
+        }
+    };
+    private View.OnClickListener httpPageListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, HttpPageActivity.class);
             startActivity(intent);
         }
     };
