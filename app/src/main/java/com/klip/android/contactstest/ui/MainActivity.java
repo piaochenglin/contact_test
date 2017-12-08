@@ -1,6 +1,7 @@
-package com.klip.android.contactstest;
+package com.klip.android.contactstest.ui;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.klip.android.contactstest.R;
 import com.klip.android.contactstest.adapter.ContactAdapter;
 import com.klip.android.contactstest.model.Contacts;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Button update_data;
     private Button delete_data;
     private Button query_result;
+    private Button web_page;
     private TextView query_result_text;
 
 
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         update_data.setOnClickListener(updateDataListener);
         delete_data = (Button) findViewById(R.id.delete_data);
         delete_data.setOnClickListener(deleteDataListener);
+        web_page = (Button) findViewById(R.id.web_page);
+        web_page.setOnClickListener(webPageListener);
         query_result_text = (TextView) findViewById(R.id.query_result_text);
         contactses = new ArrayList<>();
         adapter = new ContactAdapter(contactses);
@@ -131,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Uri uri = Uri.parse("content://com.klip.android.broadcastbestpractice.provider/books");
             getContentResolver().delete(uri, null, null);
+        }
+    };
+    private View.OnClickListener webPageListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, WebviewActivity.class);
+            startActivity(intent);
         }
     };
     private View.OnClickListener queryDataListener = new View.OnClickListener() {
